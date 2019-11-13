@@ -49,19 +49,38 @@ export const NavItem = styled.div`
   }
 `
 export const SearchWrapper = styled.div`
-  width: 165px;
-  height: 100%;
+  xwidth: 165px;
+  height: 56px;
   position: relative;
   float: left;
   margin-right: 5px;
   padding-left: 15px;
+  .slide-enter {
+    width: 160px;
+    transition: all 0.2s ease-out;
+  }
+  .slide-enter-active {
+    width: 240px;
+  }
+  .slide-exit {
+    width: 240px;
+    transition: all 0.2s ease-out;
+  }
+  .slide-exit-active {
+    width: 160px;
+  }
   .iconfont {
     position: absolute;
     right: 15px;
     top: 20px;
     width: 30px;
+    border-radius: 15px;
     text-align: center;
     line-leight: 30px;
+    &.focused {
+      background-color: #777;
+      color: #fff;
+    }
   }
 `
 export const NavSearch = styled.input.attrs({
@@ -70,18 +89,21 @@ export const NavSearch = styled.input.attrs({
   width: 150px;
   height: 38px;
   box-sizing: border-box; ${'' /* 防止padding撑大盒子 */}
-  xdisplay: block;
+  display:block;
   font-size: 14px;
   line-height: 20px;
   border: 1px solid #eee;
   border-radius: 40px;
   padding: 0 20px 0 20px;
   background: #eee;
-  position: absolute;
-  top: 8px;
+  ${'' /* xposition: absolute; 不能使用绝对定位，子元素脱离文档流，父元素的宽度会为0，动画的时候父元素的宽度无法自适应 */}
+  margin-top: 8px;
   color: #666;
   &::placeholder {
     color: #999;
+  }
+  &.focused {
+    width: 240px;
   }
 `
 export const Addition = styled.div`
