@@ -45,7 +45,8 @@ class Header extends React.Component{
 }
 const mapStateToProps = (state) => {
   return {
-    focused: state.header.focused
+    focused: state.getIn(['header','focused'])
+    // focused: state.get('header').get('focused') // 得使用immutable得get方法来得到数据,与上一行等价
   }
 }
 const mapDispatchToProps = (dispatch) => {
