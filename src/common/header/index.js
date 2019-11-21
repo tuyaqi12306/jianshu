@@ -1,23 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {HeaderWrapper, Logo, Nav, NavItem, SearchWrapper, NavSearch, Addition, Button} from './style'
 import { CSSTransition } from 'react-transition-group'
+// import * as actionCreators from './store/actionCreators'
 class Header extends React.Component{
-  constructor(props) {
-    super(props)
-    this.state = {
-      focused: false
-    }
-  }
-  handleInputFocus = () => {
-    this.setState({
-      focused: true
-    })
-  }
-  handleInputBlur = () => {
-    this.setState({
-      focused: false
-    })
-  }
   render() {
     return (
       <HeaderWrapper>
@@ -31,18 +17,19 @@ class Header extends React.Component{
           </NavItem>
           <SearchWrapper>
             <CSSTransition
-              in={this.state.focused}
+              in={this.props.focused}
               timeout={200}
               classNames='slide'
             >
               <NavSearch
-                className={this.state.focused ? 'focused' : ''}
-                onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur}
+                className={this.props.focused ? 'focused' : ''}
+                onFocus={this.props.handleInputFocus}
+                onBlur={this.props.handleInputBlur}
               >
               </NavSearch>
             </CSSTransition>
-            <i className={this.state.focused ? 'focused iconfont' : 'iconfont'}> &#xe62a;</i>
+            <i className={this.props.focused ? 'focused iconfont' : 'iconfont'}> &#xe62a;</i>
+
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -56,4 +43,28 @@ class Header extends React.Component{
     )
   }
 }
-export default Header
+const mapStateToProps = (state) => {
+  return {
+    focused: state.header.focused
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleInputFocus() {
+      const action = {
+        type: 'searchFocus'
+      }
+      dispatch(action)
+      //将这里的action换为一个函数，type为一个常量而不是一个字符串
+      // dispatch(actionCreators.searchFocus())
+    },
+    handleInputBlur() {
+      const action = {
+        type: 'searchBlur'
+      }
+      dispatch(action)
+      // dispatch(actionCreators.searchBlur())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

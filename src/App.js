@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './common/header'
-function App() {
-  return (
-    <div className="App">
-     <Header/>
-    </div>
-  );
+import { Provider } from 'react-redux'
+import store from './store'
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Header/>
+      </Provider>
+    );
+  }
 }
 
 export default App;

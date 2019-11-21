@@ -13,21 +13,23 @@ export const Logo = styled.a.attrs({ // 传入属性
   display: block;
   width: 100px;
   height: 100%;
-  position: absolute;
+  ${'' /* position: absolute;
   top: 0;
   left: 0;
-  vertical-align: middle;
+  transform: translate(-50%,0); */}
+  float: left;
   cursor: pointer;
   background: url(${logoPic}); ${'' /*不能直接插入文件路径 */}
   background-size: contain; ${'' /* 背景图片尺寸设置 */}
-
+  background-color: transparent;
 `
 export const Nav = styled.div`
-  width: 945px;
+  float: left;
+  width: 845px;
   height: 100%;
   box-sizing: border-box;
   ${'' /* box-sizing属性不能继承，border-box表示设置的width包含边框和内边距以及内容区 */}
-  xpadding: 0 70px;
+  padding: 0 70px;
   margin: 0 auto;
   color: #333;
   position: relative;
@@ -55,28 +57,14 @@ export const SearchWrapper = styled.div`
   float: left;
   margin-right: 5px;
   padding-left: 15px;
-  .slide-enter {
-    width: 160px;
-    transition: all 0.2s ease-out;
-  }
-  .slide-enter-active {
-    width: 240px;
-  }
-  .slide-exit {
-    width: 240px;
-    transition: all 0.2s ease-out;
-  }
-  .slide-exit-active {
-    width: 160px;
-  }
   .iconfont {
     position: absolute;
-    right: 15px;
-    top: 20px;
+    right: 5px;
+    top: 12px;
     width: 30px;
     border-radius: 15px;
     text-align: center;
-    line-leight: 30px;
+    line-height: 30px;
     &.focused {
       background-color: #777;
       color: #fff;
@@ -105,11 +93,26 @@ export const NavSearch = styled.input.attrs({
   &.focused {
     width: 240px;
   }
+  &.slide-enter {
+    width: 160px;
+    transition: all 0.2s ease-out;
+  }
+  &.slide-enter-active {
+    width: 240px;
+  }
+  &.slide-exit {
+    width: 240px;
+    transition: all 0.2s ease-out;
+  }
+  &.slide-exit-active {
+    width: 160px;
+  }
 `
 export const Addition = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+  ${'' /* float: right; */}
   height: 56px;
 `
 export const Button = styled.div`
