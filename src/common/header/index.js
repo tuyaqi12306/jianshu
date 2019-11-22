@@ -20,23 +20,41 @@ import {
 // import * as actionCreators from './store/actionCreators'
 
 class Header extends React.Component{
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
   getListArea = (show) => {
-    if (show) {
+    const {list, page, totalPage, mouseIn} = this.props
+    const newList = list.toJS() // 将immutable对象变为普通数组
+    const pageList = []
+    if (newList.length) { // 第一次newList为空，key都为undefined
+      for(let i = page * 10; i < (page + 1) * 10; i++) {
+        pageList.push(<SearchInfoItem key={newList[i]}> {newList[i]} </SearchInfoItem>)
+      }
+    }
+
+    if (show || mouseIn) {
       return (
-        <SearchInfo>
+        <SearchInfo
+          onMouseEnter={this.props.handleMouseEnter}
+          onMouseLeave={this.props.handleMouseLeave}
+        >
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+            <SearchInfoSwitch
+              onClick={() => this.props.handleChangePage(page, totalPage, this.spinIcon)}
+            >
+              <i ref={(icon) => {this.spinIcon = icon}} className='iconfont spin'>&#xe600;</i>
+              换一批
+            </SearchInfoSwitch>
           </SearchInfoTitle>
           <SearchInfoList>
             {
-              this.props.list.map((item) => {
-                return <SearchInfoItem key={item}> {item} </SearchInfoItem>
-              })
+              pageList
             }
+              {/* this.props.list.map((item) => {
+                return <SearchInfoItem key={item}> {item} </SearchInfoItem>
+              }) */}
           </SearchInfoList>
         </SearchInfo>
       )
@@ -45,6 +63,7 @@ class Header extends React.Component{
     }
   }
   render() {
+    const {focused, list} = this.props
     return (
       <HeaderWrapper>
         <Logo />
@@ -57,19 +76,20 @@ class Header extends React.Component{
           </NavItem>
           <SearchWrapper>
             <CSSTransition
-              in={this.props.focused}
+              in={focused}
               timeout={200}
               classNames='slide'
             >
               <NavSearch
-                className={this.props.focused ? 'focused' : ''}
-                onFocus={this.props.handleInputFocus}
+                className={focused ? 'focused' : ''}
+                // onFocus={this.props.handleInputFocus}
+                onFocus={() => this.props.handleInputFocus(list)}
                 onBlur={this.props.handleInputBlur}
               >
               </NavSearch>
             </CSSTransition>
-            <i className={this.props.focused ? 'focused iconfont' : 'iconfont'}> &#xe62a;</i>
-            {this.getListArea(this.props.focused)}
+            <i className={ focused ? 'focused iconfont zoom' : 'iconfont zoom'}> &#xe62a;</i>
+            {this.getListArea(focused)}
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -86,10 +106,12 @@ class Header extends React.Component{
 const getList = () => {
   return (dispatch) => {
     axios.get('/api/headerList.json').then((res) => { // 文件路径先找路由下的，找不到找public文件夹下的
-      const data = res.data // 拿到的响应体数据部分
+      const result = res.data // 拿到的响应体数据部分
+      let data = result.data
       const action = {
         type: 'changeListData',
-        data: data.data ////拿到数据的data字段
+        data: data, //拿到数据的data字段
+        totalPage: Math.ceil(data.length / 10)
       }
       dispatch(action)
       //redux工作流：改变store的数据，创建一个action，由dispatch派发给reducer，接手之后返回一个新的对象再渲染即可。
@@ -102,19 +124,22 @@ const mapStateToProps = (state) => { // 拿到数据
   return {
     focused: state.getIn(['header','focused']),
     // focused: state.get('header').get('focused') // 得使用immutable得get方法来得到数据,与上一行等价
-    list: state.getIn(['header','list'])
+    list: state.getIn(['header','list']),
+    page: state.getIn(['header','page']),
+    totalPage: state.getIn(['header','totalPage']),
+    mouseIn: state.getIn(['header','mouseIn'])
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleInputFocus() {
+    handleInputFocus(list) {
       const action = {
         type: 'searchFocus'
       }
       dispatch(action)
-      //将这里的action换为一个函数，type为一个常量而不是一个字符串
-      // dispatch(actionCreators.searchFocus())
-      dispatch(getList()) // focus状态下还需派发list数据
+      dispatch(getList())
+      // (list.size === 0) && dispatch(getList()) // focus状态下还需派发list数据
+      // 注意！这里接收到的不是对象而是一个函数，所以必须使用redux-thunk这个中间键
     },
     handleInputBlur() {
       const action = {
@@ -122,6 +147,32 @@ const mapDispatchToProps = (dispatch) => {
       }
       dispatch(action)
       // dispatch(actionCreators.searchBlur())
+    },
+    handleMouseEnter() {
+      const action = {
+        type: 'mouseEnter'
+      }
+      dispatch(action)
+    },
+    handleMouseLeave() {
+      const action = {
+        type: 'mouseLeave'
+      }
+      dispatch(action)
+    },
+    handleChangePage(page, totalPage, spin) {
+      let originAngle = spin.style.transfrom.replace(/[^0-9]/ig, '')
+      if (originAngle) {
+        originAngle = parseInt(originAngle, 10)
+      }else {
+        originAngle = 0
+      }
+      spin.style.transfrom = "ratate(" + (originAngle + 360) + "deg)"
+
+      const action = {
+        type: 'changePage'
+      }
+      dispatch(action)
     }
   }
 }
