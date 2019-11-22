@@ -1,10 +1,47 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {HeaderWrapper, Logo, Nav, NavItem, SearchWrapper, NavSearch, Addition, Button} from './style'
 import { CSSTransition } from 'react-transition-group'
+import {
+  HeaderWrapper,
+  Logo,
+  Nav,
+  NavItem,
+  SearchWrapper,
+  NavSearch,
+  SearchInfo,
+  SearchInfoTitle,
+  SearchInfoSwitch,
+  SearchInfoList,
+  SearchInfoItem,
+  Addition,
+  Button
+} from './style'
 // import * as actionCreators from './store/actionCreators'
-class Header extends React.Component{
-  render() {
+
+const getListArea = (show) => {
+  if (show) {
+    return (
+      <SearchInfo>
+        <SearchInfoTitle>
+          热门搜索
+          <SearchInfoSwitch>换一批</SearchInfoSwitch>
+        </SearchInfoTitle>
+        <SearchInfoList>
+          <SearchInfoItem>教育</SearchInfoItem>
+          <SearchInfoItem>简书</SearchInfoItem>
+          <SearchInfoItem>生活</SearchInfoItem>
+          <SearchInfoItem>投稿</SearchInfoItem>
+          <SearchInfoItem>书籍</SearchInfoItem>
+          <SearchInfoItem>考研</SearchInfoItem>
+        </SearchInfoList>
+      </SearchInfo>
+    )
+  }else {
+    return null
+  }
+}
+
+const Header = (props) => {
     return (
       <HeaderWrapper>
         <Logo />
@@ -17,19 +54,19 @@ class Header extends React.Component{
           </NavItem>
           <SearchWrapper>
             <CSSTransition
-              in={this.props.focused}
+              in={props.focused}
               timeout={200}
               classNames='slide'
             >
               <NavSearch
-                className={this.props.focused ? 'focused' : ''}
-                onFocus={this.props.handleInputFocus}
-                onBlur={this.props.handleInputBlur}
+                className={props.focused ? 'focused' : ''}
+                onFocus={props.handleInputFocus}
+                onBlur={props.handleInputBlur}
               >
               </NavSearch>
             </CSSTransition>
-            <i className={this.props.focused ? 'focused iconfont' : 'iconfont'}> &#xe62a;</i>
-
+            <i className={props.focused ? 'focused iconfont' : 'iconfont'}> &#xe62a;</i>
+            {getListArea(props.focused)}
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -41,7 +78,6 @@ class Header extends React.Component{
         </Addition>
       </HeaderWrapper>
     )
-  }
 }
 const mapStateToProps = (state) => {
   return {
