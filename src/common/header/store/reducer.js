@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable'
 const defaultState = fromJS({
-  focused: false
+  focused: false,
+  list: []
 })
 export default (state = defaultState, action) => {
   if(action.type === 'searchFocus') {
@@ -15,6 +16,9 @@ export default (state = defaultState, action) => {
     // return {
     //   focused: false
     // }
+  }
+  if(action.type === 'changeListData') {
+    return state.set('list', fromJS(action.data)) // 把普通数组data变为一个immutable类型
   }
   return state
 }
