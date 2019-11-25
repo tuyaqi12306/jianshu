@@ -1,31 +1,20 @@
 import {fromJS} from 'immutable'
 
 const defaultState = fromJS({
-  articleList: [{
-    id: 1,
-    title: '如何开启脉轮能量',
-    desc: '脉轮作为身体的能量中心，它不仅仅关系到身体组织的健康活力，它也能够滋养你的细微体，如情绪体、理智体、灵性体等等，到高等阶段，它会帮助你连接宇宙能量，进入生命之河头顶光柱的恩宠状态（这被称为高我临在）；会让你激活灵魂之星和超灵，进入你的多层级灵魂碎片和宇宙自我的合并过程，最后改变身体细胞的碳基质，通过水晶基质的身体进入高次元的频谱谐振当中。 唤醒昆达里尼通常是激活脉轮能量的关键一步，然而要唤醒它，除非你的理智和情感面都得到了净化，代表着左右脉气的自然和谐流动，最后          气入中脉，在专注力的聚焦下，昆达里尼就会唤醒。',
-    imgUrl: 'https://upload-images.jianshu.io/upload_images/16235793-3e082abcfe652b7a.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-  },{
-    id: 2,
-    title: '如何开启脉轮能量',
-    desc: '脉轮作为身体的能量中心，它不仅仅关系到身体组织的健康活力，它也能够滋养你的细微体，如情绪体、理智体、灵性体等等，到高等阶段，它会帮助你连接宇宙能量，进入生命之河头顶光柱的恩宠状态（这被称为高我临在）；会让你激活灵魂之星和超灵，进入你的多层级灵魂碎片和宇宙自我的合并过程，最后改变身体细胞的碳基质，通过水晶基质的身体进入高次元的频谱谐振当中。 唤醒昆达里尼通常是激活脉轮能量的关键一步，然而要唤醒它，除非你的理智和情感面都得到了净化，代表着左右脉气的自然和谐流动，最后          气入中脉，在专注力的聚焦下，昆达里尼就会唤醒。',
-    imgUrl: 'https://upload-images.jianshu.io/upload_images/16235793-3e082abcfe652b7a.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-  },{
-    id: 3,
-    title: '如何开启脉轮能量',
-    desc: '脉轮作为身体的能量中心，它不仅仅关系到身体组织的健康活力，它也能够滋养你的细微体，如情绪体、理智体、灵性体等等，到高等阶段，它会帮助你连接宇宙能量，进入生命之河头顶光柱的恩宠状态（这被称为高我临在）；会让你激活灵魂之星和超灵，进入你的多层级灵魂碎片和宇宙自我的合并过程，最后改变身体细胞的碳基质，通过水晶基质的身体进入高次元的频谱谐振当中。 唤醒昆达里尼通常是激活脉轮能量的关键一步，然而要唤醒它，除非你的理智和情感面都得到了净化，代表着左右脉气的自然和谐流动，最后          气入中脉，在专注力的聚焦下，昆达里尼就会唤醒。',
-    imgUrl: 'https://upload-images.jianshu.io/upload_images/16235793-3e082abcfe652b7a.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-  },{
-    id: 4,
-    title: '如何开启脉轮能量',
-    desc: '脉轮作为身体的能量中心，它不仅仅关系到身体组织的健康活力，它也能够滋养你的细微体，如情绪体、理智体、灵性体等等，到高等阶段，它会帮助你连接宇宙能量，进入生命之河头顶光柱的恩宠状态（这被称为高我临在）；会让你激活灵魂之星和超灵，进入你的多层级灵魂碎片和宇宙自我的合并过程，最后改变身体细胞的碳基质，通过水晶基质的身体进入高次元的频谱谐振当中。 唤醒昆达里尼通常是激活脉轮能量的关键一步，然而要唤醒它，除非你的理智和情感面都得到了净化，代表着左右脉气的自然和谐流动，最后          气入中脉，在专注力的聚焦下，昆达里尼就会唤醒。',
-    imgUrl: 'https://upload-images.jianshu.io/upload_images/16235793-3e082abcfe652b7a.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
-  }]
+  articleList: [],
+  recommendList: [],
+  writerList: []
 })
 
 export default (state = defaultState, action) => {
+  console.log(1111,action)
   switch (action.type) {
+    case 'change_HomeData':
+      return state.merge({
+        articleList: fromJS(action.articleList),
+        recommendList: fromJS(action.recommendList),
+        writerList: fromJS(action.writerList)
+      })
     default:
       return state
   }
