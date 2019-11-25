@@ -135,8 +135,8 @@ export const SearchInfoSwitch = styled.span`
     font-size: 10px;
     margin-right: 2px;
     transition: all .2s ease-in;
-    ${'' /* transfrom: ratate(0deg); */}
-    transfrom-origin: center center;
+    transform: rotate(0deg);
+    transform-origin: center center;
   }
 `
 export const SearchInfoList = styled.div`
