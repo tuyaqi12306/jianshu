@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import {Link} from 'react-router-dom'
-import logoPic from "../../statics/logo.jpg"
+import logoPic from "../../statics/logo.png"
 import axios from 'axios'
 import {
   HeaderWrapper,
