@@ -2,34 +2,50 @@ import styled from 'styled-components'
 import logoPic from '../../statics/logo.jpg'
 // 带样式的div标签
 export const HeaderWrapper = styled.div`
+  min-width: 768px;
+  max-width: 1440px;
+  margin: 0 auto;
   height: 56px;
-  border-bottom: 1px solid #f0f0f0;
   position: relative;
+  font-size: 17px;
   box-sizing: border-box;
+  ::after {
+    content: '';
+    display: block;
+    width: 100%;
+    clear: both;
+    border-bottom: 1px solid #f0f0f0;
+  }
 `
 export const Logo = styled.a.attrs({ // 传入属性
   href: '/'
 })`
+  float: left;
   display: block;
   width: 100px;
-  height: 100%;
-  ${'' /* position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%,0); */}
-  float: left;
+  height: 56px;
   cursor: pointer;
-  background: url(${logoPic}); ${'' /*不能直接插入文件路径 */}
-  background-size: contain; ${'' /* 背景图片尺寸设置 */}
   background-color: transparent;
+  box-sizing: border-box;
+  img {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+  }
 `
 export const Nav = styled.div`
-  float: left;
-  width: 845px;
+  @media (min-width: 992px) {
+    width: 960px;
+    padding: 0;
+    overflow: visible;
+  }
+  @media (max-width: 1080px) {
+    width: 750px;
+  }
+  width: 960px;
   height: 100%;
   box-sizing: border-box;
-  ${'' /* box-sizing属性不能继承，border-box表示设置的width包含边框和内边距以及内容区 */}
-  padding: 0 70px;
+  padding: 0 15px;
   margin: 0 auto;
   color: #333;
   position: relative;

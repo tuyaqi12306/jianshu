@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
+import logoPic from "../../statics/logo.jpg"
 import axios from 'axios'
 import {
   HeaderWrapper,
@@ -66,7 +67,9 @@ class Header extends React.Component{
     const {focused, list} = this.props
     return (
       <HeaderWrapper>
-        <Logo />
+        <Logo>
+          <img src={logoPic} alt=""/>
+        </Logo>
         <Nav>
           <NavItem className='left active'>首页</NavItem>
           <NavItem className='left'>下载App</NavItem>
