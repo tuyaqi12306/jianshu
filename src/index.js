@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style.js'; // css文件引入会全局生效
+import './style.css'; // css文件引入会全局生效
 import './statics/iconfonts/iconfont.css';
 import App from './App';
 

@@ -8,35 +8,41 @@ export const HomeWrapper = styled.div`
 
 export const HomeLeft = styled.div`
   float: left;
-  margin-left: 15px;
+  box-sizing: border-box;
+  padding: 30px 0 0 15px;
+  width: 640px;
   padding-top: 30px;
-  width: 625px;
 `
 export const ListItem = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: 200px;
-  padding: 20px 0;
+  padding: 10px 0;
   margin-bottom: 15px;
   border-bottom: 1px solid #f0f0f0;
   line-height: 20px;
   word-wrap: break-word;
   overflow: hidden;
   .pic {
-    width: 125px;
-    height: 100px;
-    margin-top: 50px;
     display: block;
     float: right;
+    width: 150px;
+    height: 100px;
+    box-sizing: border-box;
+    margin-top: 30px;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+    cursor: pointer;
+    vertical-align: middle;
   }
 `
 export const ListInfo = styled.div`
-  width: 500px;
+  width: 460px;
   float: left;
   .title {
     line-height: 27px;
     font-size: 18px;
-    font-weight: blod;
+    font-weight: 700;
     color: #333;
   }
   .desc {
@@ -51,8 +57,11 @@ export const ListInfo = styled.div`
 }
 `
 export const HomeRight = styled.div`
-  width: 280px;
   float: right;
+  box-sizing: border-box;
+  width: 280px;
+  margin-left: 40px;
+  padding-top: 30px;
 `
 export const RecommendWrapper = styled.div`
   width: 280px;
@@ -104,5 +113,19 @@ export const LoadMore = styled.div`
   background-color: #a5a5a5;
   border-radius: 20px;
   color: #fff;
+  cursor: pointer;
+`
+export const BackTop = styled.div`
+  position: fixed;
+  right:40px;
+  bottom: 40px;
+  z-index: 999;
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  border: 1px solid #ccc;
   cursor: pointer;
 `

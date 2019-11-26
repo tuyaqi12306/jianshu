@@ -16,7 +16,6 @@ export const getHomeInfo = () => {
 }
 
 export const getMoreList = (page) => {
-  debugger;
   return (dispatch) => {
     axios.get('/api/homeList.json?page=' + page).then((res) => {
       const result = res.data.data
@@ -27,5 +26,11 @@ export const getMoreList = (page) => {
       }
       dispatch(action)
     })
+  }
+}
+export const togleTopShow = (show) => {
+  return {
+    type: 'change_ScrollTopShow',
+    show
   }
 }
