@@ -1,11 +1,25 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
+// PureComponent 自己底层实现了shouldComponentUpdate
 import List from './components/List'
 import Recommend from './components/Recommend'
 import Writer from './components/Writer'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
 import { HomeWrapper, HomeLeft, HomeRight, BackTop } from './style'
-class Home extends Component {
+class Home extends PureComponent {
+  handleScrollTop = () => {
+    window.scroll(0,0)
+  }
+  bindEvents = () => {
+    window.addEventListener('scroll', this.props.changeScrollTopShow)
+  }
+  componentDidMount() {
+    this.props.changeHomeData()
+    this.bindEvents()
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.props.changeHomeData)
+  }
   render() {
     return (
       <HomeWrapper>
@@ -20,20 +34,8 @@ class Home extends Component {
       </HomeWrapper>
     )
   }
-  componentDidMount() {
-    this.props.changeHomeData()
-    this.bindEvents()
-  }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.props.changeHomeData)
-  }
-  handleScrollTop = () => {
-    window.scroll(0,0)
-  }
-  bindEvents = () => {
-    window.addEventListener('scroll', this.props.changeScrollTopShow)
-  }
 }
+
 const mapStateToProps = (state) => ({
   showScroll: state.getIn(['home', 'showScroll'])
 })
