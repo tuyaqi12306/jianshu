@@ -95,3 +95,14 @@ export const WriterItem = styled.li`
     margin-right: 10px;
   }
 `
+export const LoadMore = styled.div`
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin: 30px 0;
+  background-color: #a5a5a5;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+`

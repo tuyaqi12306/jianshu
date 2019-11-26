@@ -62,11 +62,16 @@ export const SearchWrapper = styled.div`
     right: 5px;
     top: 12px;
     width: 30px;
+    height: 30px;
     border-radius: 15px;
     text-align: center;
     line-height: 30px;
+    font-weight: 400;
+    font-size: 17px;
+    color: #969696;
+    cursor: pointer;
     &.focused {
-      background-color: #777;
+      background-color: rgb(150,150,150);
       color: #fff;
     }
   }
