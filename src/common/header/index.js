@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
+import {Link} from 'react-router-dom'
 import logoPic from "../../statics/logo.jpg"
 import axios from 'axios'
 import {
@@ -21,9 +22,6 @@ import {
 // import * as actionCreators from './store/actionCreators'
 
 class Header extends React.Component{
-  // constructor(props) {
-  //   super(props)
-  // }
   getListArea = (show) => {
     const {list, page, totalPage, mouseIn} = this.props
     const newList = list.toJS() // 将immutable对象变为普通数组
@@ -67,9 +65,11 @@ class Header extends React.Component{
     const {focused, list} = this.props
     return (
       <HeaderWrapper>
-        <Logo>
-          <img src={logoPic} alt=""/>
-        </Logo>
+        <Link to='/'>
+          <Logo>
+            <img src={logoPic} alt=""/>
+          </Logo>
+        </Link>
         <Nav>
           <NavItem className='left active'>首页</NavItem>
           <NavItem className='left'>下载App</NavItem>

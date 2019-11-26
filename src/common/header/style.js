@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import logoPic from '../../statics/logo.jpg'
+
 // 带样式的div标签
 export const HeaderWrapper = styled.div`
   min-width: 768px;
@@ -17,9 +17,7 @@ export const HeaderWrapper = styled.div`
     border-bottom: 1px solid #f0f0f0;
   }
 `
-export const Logo = styled.a.attrs({ // 传入属性
-  href: '/'
-})`
+export const Logo = styled.div`
   float: left;
   display: block;
   width: 100px;
