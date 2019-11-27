@@ -40,10 +40,14 @@ export const ListInfo = styled.div`
   width: 460px;
   float: left;
   .title {
-    line-height: 27px;
+    margin: -7px 0 4px;
+    line-height: 1.5;
     font-size: 18px;
     font-weight: 700;
     color: #333;
+  }
+  .title:visited {
+    color: #969696;
   }
   .desc {
     line-height: 24px;
