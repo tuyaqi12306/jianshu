@@ -7,6 +7,7 @@ export const HeaderWrapper = styled.div`
   margin: 0 auto;
   height: 56px;
   position: relative;
+  z-index: 10;
   font-size: 17px;
   box-sizing: border-box;
   ::after {
