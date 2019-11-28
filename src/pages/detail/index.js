@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {DetailWrapper, Header, Content} from './style'
+import {withRouter} from 'react-router-dom' // 获得router里的参数
 import {actionCreators} from './store'
 class Detail extends PureComponent {
   render() {
@@ -26,4 +27,4 @@ const mapDispatch = (dispatch) => ({
     dispatch(actionCreators.getDetail(id))
   }
 })
-export default connect(mapStateToProps, mapDispatch)(Detail)
+export default connect(mapStateToProps, mapDispatch)(withRouter(Detail))

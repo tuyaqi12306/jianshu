@@ -7,7 +7,7 @@ class Login extends PureComponent {
   render() {
     const {loginStatus} = this.props
     if(loginStatus) {
-      return <Redirect to='/'/>
+      return <Redirect to='/'/> // 直接跳转到该路径
     }else {
       return (
         <LoginWrapper>
